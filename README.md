@@ -17,8 +17,34 @@ docker build -t "[NAME]" .
 Run:
 * I'm following the official docs -> https://docs.chain.link/docs/running-a-chainlink-node
 ** Specifically -> https://docs.chain.link/docs/run-an-ethereum-client#geth
+
+## Docker-compose
 * I've also included the docker-compose file I'm using.
 * Make sure to create any required directories and then run:
 ```
 docker-compose up -d && docker-compose logs -f [service-name]
 ```
+* Base taken from https://github.com/pokt-network/docker-geth/blob/master/docker-compose.yml
+* You can use the testnet via:
+```
+version: '3.3'
+
+volumes:
+  geth-rinkeby: {}
+
+services:
+  geth-rinkeby:
+    image: golang-geth-arm
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - "8545"
+      - "8546"
+      - "30303"
+    volumes:
+      - /home/pi/.geth_rinkeby:/geth_rinkeby
+    command: '[OPTIONS'
+```
+* Make sure to edit the Dockerfile to suit and rebuild
