@@ -1,6 +1,7 @@
 # Run Geth on a Raspberry Pi using docker
 
-This is a clone of [asmike/golang/raspbian-docker](https://github.com/askmike/golang-raspbian-docker)
+This is a clone of [asmike/golang/raspbian-docker](https://github.com/askmike/golang-raspbian-docker).
+
 Run the Geth client on a Raspberry Pi using docker. This has only been tested on an RPi4.
 This uses the ARM32v7 build of the official golang docker image and builds on top of that.
 
