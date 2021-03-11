@@ -5,7 +5,7 @@ volumes:
 
 services:
   geth-mainnet:
-    image: golang-geth-arm
+    image: golang-geth-arm:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -15,5 +15,5 @@ services:
       - "8546"
       - "30303"
     volumes:
-      - /home/pi/.geth:/geth
-    command: '--syncmode fast --ws --ipcdisable --ws.addr 0.0.0.0 --ws.origins="*" --datadir /geth --verbosity 3'
+      - /Volumes/data/geth:/geth
+    command: '--syncmode fast --ws --ipcdisable --ws.addr 0.0.0.0 --ws.origins="*" --datadir /geth --cache 2048 --verbosity 3'
