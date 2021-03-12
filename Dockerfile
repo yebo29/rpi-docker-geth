@@ -1,4 +1,4 @@
-FROM arm32v7/golang:latest
+FROM arm64v8/golang:latest
 
 # Since we build on ARM, we need atleast v1.6 because we need this fix:
 # https://github.com/ethereum/go-ethereum/pull/3715

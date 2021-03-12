@@ -1,15 +1,20 @@
-# Run Geth on a Raspberry Pi using docker
+# Run Geth on a Raspberry Pi or compatible ARM board using docker
 
 This is a clone of [asmike/golang/raspbian-docker](https://github.com/askmike/golang-raspbian-docker).
 
-Run the Geth client on a Raspberry Pi using docker. This has only been tested on an RPi4.
-This uses the ARM32v7 build of the official golang docker image and builds on top of that.
+Run the Geth client on a Raspberry Pi or compatible ARM board using docker. This has only been tested on an RPi4.
+This uses the ARM64v8 build of the official golang docker image and builds on top of that.
+
+* *NOTE:* Requires a 64 bit OS
+* For best results, use an Rpi4 with 8GB RAM as you may experience OOM errors
+* It is not recommended to use the SDCARD to store the blockchain as it ill shorten its lifespan. Use external storage instead.
+* If you have less memory, consider setting `syncmode` to light, or keeping and properly setting the `--cache` option
 
 ## Usage
 
 Build:
 * Make sure to change the Dockerfile to include the correct version you require of Geth. See -> https://github.com/ethereum/go-ethereum/branches
-* Currently set to the most current stable `1.9`
+* Currently set to the most current stable `1.10`
 * Change "[NAME]" to whatever suits you
 ```
 docker build -t "[NAME]" .
@@ -20,11 +25,13 @@ Run:
 
 ## Docker-compose
 * I've also included the docker-compose file I'm using.
-* Make sure to create any required directories and then run:
+* Make sure to create any required directories and/or modify settings and then run:
 ```
+docker-compose build # only if you haven't yet built the image
 docker-compose up -d && docker-compose logs -f [service-name]
 ```
 * Base taken from https://github.com/pokt-network/docker-geth/blob/master/docker-compose.yml
+* Remove the `cache --2048` option if you have plenty of memory
 * You can use the testnet via:
 ```
 version: '3.3'
