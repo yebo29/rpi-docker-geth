@@ -6,22 +6,24 @@ Run the Geth client on a Raspberry Pi or compatible ARM board using docker. This
 This uses the ARM64v8 build of the official golang docker image and builds on top of that.
 
 * *NOTE:* Requires a 64 bit OS
-* For best results, use an Rpi4 with 8GB RAM as you may experience OOM errors
-* It is not recommended to use the SDCARD to store the blockchain as it ill shorten its lifespan. Use external storage instead.
+* For best results, use an Rpi4/board with 8GB RAM or more as you may experience OOM errors if there is not enough RAM
+* It is not recommended to use the SDCARD to store the blockchain as it will shorten its lifespan. Use external storage instead, SSD preferred.
 * If you have less memory, consider setting `syncmode` to light, or keeping and properly setting the `--cache` option
 
 ## Usage
 
 Build:
 * Make sure to change the Dockerfile to include the correct version you require of Geth. See -> https://github.com/ethereum/go-ethereum/branches
-* Currently set to the most current stable `1.10`
 * Change "[NAME]" to whatever suits you
 ```
 docker build -t "[NAME]" .
 ```
-Run:
+* You can also build using the docker-compose file:
+```
+docker-compose build
+```
 * I'm following the official docs -> https://docs.chain.link/docs/running-a-chainlink-node
-** Specifically -> https://docs.chain.link/docs/run-an-ethereum-client#geth
+  * Specifically -> https://docs.chain.link/docs/run-an-ethereum-client#geth
 
 ## Docker-compose
 * I've also included the docker-compose file I'm using.
