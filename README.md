@@ -8,7 +8,7 @@ This uses the ARM64v8 build of the official golang docker image and builds on to
 * *NOTE:* Requires a 64 bit OS
 * For best results, use an Rpi4/board with 8GB RAM or more as you may experience OOM errors if there is not enough RAM
 * It is not recommended to use the SDCARD to store the blockchain as it will shorten its lifespan. Use external storage instead, SSD preferred.
-* If you have less memory, consider setting `syncmode` to light, or keeping and properly setting the `--cache` option
+* If you have less memory, consider setting `--syncmode` to light, and/or properly setting the `--cache` option
 
 ## Usage
 
@@ -29,7 +29,7 @@ docker-compose build
 * I've also included the docker-compose file I'm using.
 * Make sure to create any required directories and/or modify settings and then run:
 ```
-docker-compose build # only if you haven't yet built the image
+docker-compose build # only if you haven't yet built the image or need to update it after ediiting the Dockerfile
 docker-compose up -d && docker-compose logs -f [service-name] #up will recreate if already existing
 ```
 * Base taken from https://github.com/pokt-network/docker-geth/blob/master/docker-compose.yml
@@ -51,8 +51,9 @@ services:
     expose:
       - "8545-8546"
       - "30303"
+#      - "any other ports you need depending on what API you choose"
     volumes:
-      - /home/pi/.geth_rinkeby:/geth_rinkeby
+      - /Volumes/data/geth_rinkeby:/geth_rinkeby
     command: '[OPTIONS'
 ```
 * Make sure to edit the Dockerfile to suit and rebuild
