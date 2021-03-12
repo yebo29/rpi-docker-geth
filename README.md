@@ -28,10 +28,10 @@ Run:
 * Make sure to create any required directories and/or modify settings and then run:
 ```
 docker-compose build # only if you haven't yet built the image
-docker-compose up -d && docker-compose logs -f [service-name]
+docker-compose up -d && docker-compose logs -f [service-name] #up will recreate if already existing
 ```
 * Base taken from https://github.com/pokt-network/docker-geth/blob/master/docker-compose.yml
-* Remove the `cache --2048` option if you have plenty of memory
+* Remove the `--cache` option if you have plenty of memory
 * You can use the testnet via:
 ```
 version: '3.3'
@@ -47,11 +47,18 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     expose:
-      - "8545"
-      - "8546"
+      - "8545-8546"
       - "30303"
     volumes:
       - /home/pi/.geth_rinkeby:/geth_rinkeby
     command: '[OPTIONS'
 ```
 * Make sure to edit the Dockerfile to suit and rebuild
+
+## Extras
+The `utils` directory contains scripts useful for working with the geth console
+* You can connect to the geth console via
+```
+geth attach ws://[ip-address]:8546
+```
+* See https://geth.ethereum.org/docs/interface/javascript-console for more information
